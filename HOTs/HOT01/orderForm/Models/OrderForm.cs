@@ -32,11 +32,14 @@ namespace orderForm.Models
         // checks the discount code and returns message
         public string DiscountMessage()
         { 
-            string message = string.Empty;
+            string message = "";
 
+            if (DiscountCode == "")
+            {
+                message = "No Discount Applied.";
+            }
 
-
-            if (DiscountCode == discountCodes[0])
+            else if (DiscountCode == discountCodes[0])
             {
                 message = "30% Discount Applied.";
             }
@@ -48,10 +51,7 @@ namespace orderForm.Models
             {
                 message = "10% Discount Applied.";
             }
-            else if (DiscountCode == "")
-            {
-                message = "No Discount Applied.";
-            }
+            
             else { message = "Invalid Discount Code."; }
 
             return message;
