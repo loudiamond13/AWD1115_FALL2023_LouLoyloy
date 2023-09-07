@@ -34,7 +34,7 @@ namespace orderForm.Models
         { 
             string message = "";
 
-            if (DiscountCode == "")
+            if (DiscountCode == null)
             {
                 message = "No Discount Applied.";
             }
