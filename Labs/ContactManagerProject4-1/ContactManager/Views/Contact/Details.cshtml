@@ -5,9 +5,13 @@
 }
 
 
+
+
+
+
 <h2>Contact Details</h2>
 
-<ul>
+<ul class="list-group">
     <li class="list-group-item">
         <label class="w-10">Name: </label>
         @Model.FirstName @Model.LastName
@@ -20,7 +24,12 @@
 
     <li class="list-group-item">
         <label class="w-10">Email: </label>
-       @Model.Email
+        @Model.Email
+    </li>
+
+    <li class="list-group-item">
+        <label>Category:</label>
+        @Model.Category?.CategoryName
     </li>
 
     <li class="list-group-item">
@@ -34,11 +43,11 @@
     </li>
 
     <li class="list-group-item">
-        <a asp-action="Edit" 
-            asp-controller="Contact" 
-            asp-route-id="@Model.ContactID"
-            asp-route-slug="@Model.Slug"
-            class="btn btn-dark">Edit</a>
+        <a asp-action="Edit"
+           asp-controller="Contact"
+           asp-route-id="@Model.ContactID"
+           asp-route-slug="@Model.Slug"
+           class="btn btn-dark">Edit</a>
 
         <a asp-action="Delete"
            asp-controller="Contact"
@@ -46,9 +55,9 @@
            asp-route-slug="@Model.Slug"
            class="btn btn-dark">Delete</a>
 
-           <a asp-action="Index"
-                asp-controller="Home"
-           class="btn btn-dark">Delete</a>
-    
+        <a asp-action="Index"
+           asp-controller="Home"
+           class="btn btn-dark">Home</a>
+
     </li>
 </ul>

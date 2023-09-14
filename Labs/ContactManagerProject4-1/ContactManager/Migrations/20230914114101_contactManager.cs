@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ContactManager.Migrations
 {
     /// <inheritdoc />
-    public partial class @new : Migration
+    public partial class contactManager : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "categories",
+                name: "Categories",
                 columns: table => new
                 {
                     CategoryID = table.Column<int>(type: "int", nullable: false)
@@ -23,7 +23,7 @@ namespace ContactManager.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_categories", x => x.CategoryID);
+                    table.PrimaryKey("PK_Categories", x => x.CategoryID);
                 });
 
             migrationBuilder.CreateTable(
@@ -44,15 +44,15 @@ namespace ContactManager.Migrations
                 {
                     table.PrimaryKey("PK_Contacts", x => x.ContactID);
                     table.ForeignKey(
-                        name: "FK_Contacts_categories_CategoryID",
+                        name: "FK_Contacts_Categories_CategoryID",
                         column: x => x.CategoryID,
-                        principalTable: "categories",
+                        principalTable: "Categories",
                         principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "categories",
+                table: "Categories",
                 columns: new[] { "CategoryID", "CategoryName" },
                 values: new object[,]
                 {
@@ -67,9 +67,9 @@ namespace ContactManager.Migrations
                 columns: new[] { "ContactID", "CategoryID", "DateAdded", "Email", "FirstName", "LastName", "Organization", "PhoneNo" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2023, 9, 8, 2, 2, 33, 836, DateTimeKind.Local).AddTicks(8391), "delores@hotmail.com", "Delores", "Del Rio", "", "555-987-6543" },
-                    { 2, 3, new DateTime(2023, 9, 8, 2, 2, 33, 836, DateTimeKind.Local).AddTicks(8453), "efren@aol.com", "Efren", "Herrera", "", "555-456-7890" },
-                    { 3, 2, new DateTime(2023, 9, 8, 2, 2, 33, 836, DateTimeKind.Local).AddTicks(8456), "MaryEllen@yahoo.com", "Mary Ellen", "Walton", "", "555-123-4567" }
+                    { 1, 1, new DateTime(2023, 9, 14, 6, 41, 1, 257, DateTimeKind.Local).AddTicks(4086), "delores@hotmail.com", "Delores", "Del Rio", "", "555-987-6543" },
+                    { 2, 3, new DateTime(2023, 9, 14, 6, 41, 1, 257, DateTimeKind.Local).AddTicks(4125), "efren@aol.com", "Efren", "Herrera", "", "555-456-7890" },
+                    { 3, 2, new DateTime(2023, 9, 14, 6, 41, 1, 257, DateTimeKind.Local).AddTicks(4127), "MaryEllen@yahoo.com", "Mary Ellen", "Walton", "", "555-123-4567" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -85,7 +85,7 @@ namespace ContactManager.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
-                name: "categories");
+                name: "Categories");
         }
     }
 }

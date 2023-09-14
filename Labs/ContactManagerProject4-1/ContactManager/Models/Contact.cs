@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ContactManager.Models
@@ -27,17 +28,18 @@ namespace ContactManager.Models
 
 
         // foreign key
+        [Required]
         [Range(1, 100, ErrorMessage = "Please Enter Contact Category. ")]
-
-
         public int CategoryID { get; set; }
 
-        public Category Category { get; set; }
+        [ValidateNever]
+        public Category? Category { get; set; }
 
 
 
         // read only property
-        public string Slug => FirstName?.Replace(' ', '-').ToLower() + LastName?.Replace(' ', '-').ToLower();
+        public string Slug => FirstName?.Replace(' ', '-').ToLower() 
+                        +'-'+ LastName?.Replace(' ', '-').ToLower();
 
 
     }

@@ -36,7 +36,7 @@ namespace ContactManager.Migrations
 
                     b.HasKey("CategoryID");
 
-                    b.ToTable("categories");
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -106,7 +106,7 @@ namespace ContactManager.Migrations
                         {
                             ContactID = 1,
                             CategoryID = 1,
-                            DateAdded = new DateTime(2023, 9, 8, 2, 2, 33, 836, DateTimeKind.Local).AddTicks(8391),
+                            DateAdded = new DateTime(2023, 9, 14, 6, 41, 1, 257, DateTimeKind.Local).AddTicks(4086),
                             Email = "delores@hotmail.com",
                             FirstName = "Delores",
                             LastName = "Del Rio",
@@ -117,7 +117,7 @@ namespace ContactManager.Migrations
                         {
                             ContactID = 2,
                             CategoryID = 3,
-                            DateAdded = new DateTime(2023, 9, 8, 2, 2, 33, 836, DateTimeKind.Local).AddTicks(8453),
+                            DateAdded = new DateTime(2023, 9, 14, 6, 41, 1, 257, DateTimeKind.Local).AddTicks(4125),
                             Email = "efren@aol.com",
                             FirstName = "Efren",
                             LastName = "Herrera",
@@ -128,7 +128,7 @@ namespace ContactManager.Migrations
                         {
                             ContactID = 3,
                             CategoryID = 2,
-                            DateAdded = new DateTime(2023, 9, 8, 2, 2, 33, 836, DateTimeKind.Local).AddTicks(8456),
+                            DateAdded = new DateTime(2023, 9, 14, 6, 41, 1, 257, DateTimeKind.Local).AddTicks(4127),
                             Email = "MaryEllen@yahoo.com",
                             FirstName = "Mary Ellen",
                             LastName = "Walton",

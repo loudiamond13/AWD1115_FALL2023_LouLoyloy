@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 
 
 builder.Services.AddDbContext<ContactContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("ContactContext") ));
+options.UseSqlServer(builder.Configuration.GetConnectionString("ContactContext")));
 
 var app = builder.Build();
 

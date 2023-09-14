@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContactManager.Controllers
 {
-    public class ContactController1 : Controller
+    public class ContactController : Controller
     {
         private ContactContext context { get; set; }
 
         //constructor
-        public ContactController1(ContactContext ctxt)
+        public ContactController(ContactContext ctxt)
         {
             context = ctxt;
 
@@ -55,7 +55,7 @@ namespace ContactManager.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edits(Contact contact)
+        public IActionResult Edit(Contact contact)
         {
             string action = (contact.ContactID == 0) ? "Add" : "Edit";
 

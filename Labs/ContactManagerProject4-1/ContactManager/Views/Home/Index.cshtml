@@ -25,7 +25,7 @@
                 <td>
                     <a asp-action="Details"
                        asp-controller="Contact"
-                       asp-route-id="@contact.CategoryID"
+                       asp-route-id="@contact.ContactID"
                        asp-route-slug="@contact.Slug">
                         @contact.FirstName
                     </a>
@@ -33,14 +33,14 @@
                 <td>
                     <a asp-action="Details"
                        asp-controller="Contact"
-                       asp-route-id="@contact.CategoryID"
+                       asp-route-id="@contact.ContactID"
                        asp-route-slug="@contact.Slug">
                         @contact.LastName
                     </a>
                 </td>
                 <td>@contact.PhoneNo</td>
                 <td>@contact.Email</td>
-                <td>@contact.Category.CategoryName</td>
+                <td>@contact.Category?.CategoryName</td>
             </tr>
 
 
