@@ -4,6 +4,8 @@ using SportsPro.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.Configure<RouteOptions>(opt => opt.LowercaseUrls = true);
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<SportsProContext>(options => options.UseSqlServer(
