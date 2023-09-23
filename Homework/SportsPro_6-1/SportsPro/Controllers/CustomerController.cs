@@ -13,6 +13,8 @@ namespace SportsPro.Controllers
             spContext = context;
         }
 
+        [Route("/customers")]
+        
         public IActionResult List()
         {
             var customers = spContext.Customers.OrderBy(cust => cust.FirstName)
@@ -29,7 +31,7 @@ namespace SportsPro.Controllers
             return View("AddEdit",new Customer());
         }
 
-
+        [Route("/customers/edit/id/{id?}")]
         [HttpGet]
         public IActionResult Edit(int id) 
         {

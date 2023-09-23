@@ -13,6 +13,7 @@ namespace SportsPro.Controllers
             spContext = context;
         }
 
+        [Route("/products")]
         public IActionResult List()
         {
             //List<Product>
@@ -30,6 +31,7 @@ namespace SportsPro.Controllers
             return View("AddEdit", new Product());
         }
 
+        [Route("/products/edit/id/{id?}")]
         [HttpGet]
         public IActionResult Edit(int id)
         {

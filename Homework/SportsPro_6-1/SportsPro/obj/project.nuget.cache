@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pPZLmK0WPYeXFBN1TmolzvULx3yFXottVTjiAcVkPzxEfNO5tKCHUnX0PxG2BKj7Q6oYgDTmX8s34ooVuAlYtQ==",
+  "dgSpecHash": "/+sI4yGZ89rHVkTJ8h1g6krJnOcvNZXNOzz/zo0MKGON9porJ+wTqyLSw61UkaaFDf4W5SJinGIeAG1XMOsD2A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\diamo\\Desktop\\AWD1115Fall2023Students-master\\AWD1115Fall2023Students-master\\AWD1115Fall2023LouLoyloy\\Homework\\SportsPro_4-4\\SportsPro\\SportsPro.csproj",
+  "projectFilePath": "C:\\Users\\diamo\\Desktop\\AWD1115Fall2023Students-master\\AWD1115Fall2023Students-master\\AWD1115Fall2023LouLoyloy\\Homework\\SportsPro_6-1\\SportsPro\\SportsPro.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diamo\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\diamo\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",

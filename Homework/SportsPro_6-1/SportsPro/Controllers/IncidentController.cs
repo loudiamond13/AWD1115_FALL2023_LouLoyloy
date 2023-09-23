@@ -14,7 +14,11 @@ namespace SportsPro.Controllers
         {
             spContext = context;
         }
+
+
+
         
+        [Route("/incidents")]
         public IActionResult List()
         {
             ViewBag.Technicians = spContext.Technicians.ToList();
@@ -26,6 +30,7 @@ namespace SportsPro.Controllers
             return View(incidents);
         }
 
+        
         [HttpGet]
         public IActionResult Add() 
         {
@@ -37,7 +42,7 @@ namespace SportsPro.Controllers
             return View("AddEdit", new Incident());
         }
 
-
+        [Route("/incidents/edit/id/{id?}")]
         [HttpGet]
         public IActionResult Edit(int id)
         {
