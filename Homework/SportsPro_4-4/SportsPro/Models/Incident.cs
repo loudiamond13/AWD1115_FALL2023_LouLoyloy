@@ -10,19 +10,24 @@ namespace SportsPro.Models
     {
         public int IncidentID { get; set; }
 
-        [ForeignKey("CustomerID")]
         [Required]
         public int CustomerID { get; set; }     // foreign key property
+        [ValidateNever]
         public Customer? Customer { get; set; }  // navigation property
 
-        [ForeignKey("ProductID")]
+
+        //[ForeignKey("ProductID")]
         [Required]
         public int ProductID { get; set; }     // foreign key property
-        public Product? Product { get; set; }   // navigation property
+        [ValidateNever]
+        public Product?  Product { get; set; }   // navigation property
+
 
         public int? TechnicianID { get; set; }     // foreign key property - nullable
-        [ForeignKey("TechnicianID")]
+        [ValidateNever]
         public Technician? Technician { get; set; }   // navigation property
+
+
 
         [Required]
         public string Title { get; set; } = string.Empty;
@@ -30,7 +35,7 @@ namespace SportsPro.Models
         [Required]
         public string Description { get; set; } = string.Empty;
 
-        public DateTime DateOpened { get; set; } 
+        public DateTime DateOpened { get; set; } = DateTime.Now;
 
         public DateTime? DateClosed { get; set; }
     }

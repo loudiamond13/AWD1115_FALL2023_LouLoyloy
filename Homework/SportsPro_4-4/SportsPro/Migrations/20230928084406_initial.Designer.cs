@@ -12,8 +12,8 @@ using SportsPro.Models;
 namespace SportsPro.Migrations
 {
     [DbContext(typeof(SportsProContext))]
-    [Migration("20230915060158_Initial")]
-    partial class Initial
+    [Migration("20230928084406_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

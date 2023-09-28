@@ -10,10 +10,7 @@ namespace SportsPro.Models
 
 
 
-        [ValidateNever] public string Phone { get; set; } = string.Empty;
-
-
-        [ValidateNever] public string Email { get; set; } = string.Empty;
+      
 
         [Required]
         public string FirstName { get; set; } = string.Empty;
@@ -35,9 +32,16 @@ namespace SportsPro.Models
 
         [Required]
         public string CountryID { get; set; } = string.Empty;
+
+        [ValidateNever]
         public Country? Country { get; set; }
 
-        
+        public string Phone { get; set; } = string.Empty;
+
+
+        public string Email { get; set; } = string.Empty;
+
+
 
         public string FullName => FirstName + " " + LastName;   // read-only property
 

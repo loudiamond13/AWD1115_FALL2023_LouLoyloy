@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SportsPro.Models;
 using System.Collections.Generic;
 
@@ -6,97 +7,124 @@ using System.Collections.Generic;
 
 namespace SportsPro.Controllers
 {
-    public class IncidentController : Controller
-    {
-        private SportsProContext spContext { get; set; }
+	public class IncidentController : Controller
+	{
+		private SportsProContext spContext { get; set; }
 
-        public IncidentController(SportsProContext context)
-        {
-            spContext = context;
-        }
-        
-        public IActionResult List()
-        {
-            ViewBag.Technicians = spContext.Technicians.ToList();
-            ViewBag.Customers = spContext.Customers.ToList();
-            ViewBag.Products = spContext.Products.ToList();
-            var incidents = spContext.Incidents.OrderBy(incident => incident.DateOpened)
-                                                .ToList();
+		public IncidentController(SportsProContext context)
+		{
+			spContext = context;
+		}
 
-            return View(incidents);
-        }
+		public void IncidentsListInfo()
+		{ 
+			//store products in a viewbag,ordered by name
+			 ViewBag.Products = spContext.Products.OrderBy(prod => prod.Name).ToList();
 
-        [HttpGet]
-        public IActionResult Add() 
-        {
-            ViewBag.Action = "Add";
-            ViewBag.Technicians = spContext.Technicians.ToList();
-            ViewBag.Customers = spContext.Customers.ToList();
-            ViewBag.Products = spContext.Products.ToList();
+			//store techs in a viewbag, ordered by name
+			ViewBag.Technicians = spContext.Technicians.OrderBy(tech => tech.Name).ToList();
+
+			//store customers in a viewbag order by name														
+			ViewBag.Customers = spContext.Customers.OrderBy(cust => cust.FirstName).ToList();
+		}
+
+
+		public IActionResult List()
+		{
+			ViewBag.Technicians = spContext.Technicians.ToList();
+			
+		   List<Incident> incidentss = spContext.Incidents.Include(incident => incident.Customer)
+																					.Include(incident => incident.Product)
+																					.OrderBy(incident => incident.DateOpened)
+																					.ToList(); 
+
+			return View(incidentss);
+		}
+
+
+
+
+
+		[HttpGet]
+		public IActionResult Add() 
+		{
+			ViewBag.Action = "Add";
+			IncidentsListInfo();
+
 
             return View("AddEdit", new Incident());
-        }
+		}
 
 
-        [HttpGet]
-        public IActionResult Edit(int id)
-        {
-            ViewBag.Action = "Edit";
-            ViewBag.Technicians = spContext.Technicians.ToList();
-            ViewBag.Customers = spContext.Customers.ToList();
-            ViewBag.Products = spContext.Products.ToList();
+		[HttpGet]
+		public IActionResult Edit(int id)
+		{
+			ViewBag.Action = "Edit";
 
-            var incident = spContext.Incidents.Find(id);
+			
+			IncidentsListInfo();
 
-            return View("AddEdit", incident);
-        }
+			var incident = spContext.Incidents.Find(id);
 
-        [HttpPost]
-        public IActionResult Save(Incident incident)
-        {
-            if (ModelState.IsValid)
-            {
-                if (incident.IncidentID > 0)
-                {
-                    spContext.Incidents.Update(incident);
-                }
-                else
-                {
-                    spContext.Incidents.Add(incident);
-                }
+			return View("AddEdit", incident);
+		}
 
-                spContext.SaveChanges();
+		[HttpPost]
+		public IActionResult Save(Incident incident)
+		{
 
-                return RedirectToAction("List", "Incident");
-            }
-            else
-            {
-                
-                ViewBag.Technicians = spContext.Technicians.ToList();
-                ViewBag.Customers = spContext.Customers.ToList();
-                ViewBag.Products = spContext.Products.ToList();
+			//check if inputs are valid
+			if (ModelState.IsValid)
+			{
 
-                return View("AddEdit", incident);
+				// if inputs are valid and there is incident choosen, update it
+				if (incident.IncidentID > 0)
+				{
+					spContext.Incidents.Update(incident); // update the selected incident
+				}
+				//else add a new incident ( incident id == 0 )
+				else
+				{
+					spContext.Incidents.Add(incident);  // makes a new incident 
+					
+				}
 
-            }
+				//save the changes
+				spContext.SaveChanges();
 
-            
-        
-        }
+				//return to List View of Incident
+				return RedirectToAction("List", "Incident");
+			}
+			else
+			{
 
-        [HttpGet]
-        public IActionResult Delete(int id)
-        {
-            var incident = spContext.Incidents.Find(id);
-            return View(incident); 
-        }
+				IncidentsListInfo();
 
-        [HttpPost]
-        public IActionResult Delete(Incident incident) 
-        {
-            spContext.Incidents.Remove(incident);
-            spContext.SaveChanges();
-            return View("List","Incident");
-        }
-    }
+				
+
+				//  if inputs are not valid, do not go anywhere
+				return View("AddEdit", incident);
+
+			}
+		}
+
+
+		[HttpGet]
+		public IActionResult Delete(int id)			// get the incident that is choosen to be deleted
+		{
+			var incident = spContext.Incidents.Find(id);  // find the selected incident from the DB
+
+			return View(incident); 
+		}
+
+		[HttpPost]
+		public IActionResult Delete(Incident incident)		
+		{
+			spContext.Incidents.Remove(incident); // deletes the choosen incident
+
+			spContext.SaveChanges();	// save changes
+
+			return RedirectToAction("List"); // return to the List View of Incident
+		}
+	}
 }
