@@ -52,16 +52,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcRW1wbG95ZWVcTGlzdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/diamo/Desktop/AWD1115Fall2023Students-master/AWD1115Fall2023Students-master/AWD1115Fall2023LouLoyloy/HOTs/HOT03/BikeShop_HOT/Areas/Admin/Views/Home/AddUpdate.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxBZGRVcGRhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/diamo/Desktop/AWD1115Fall2023Students-master/AWD1115Fall2023Students-master/AWD1115Fall2023LouLoyloy/HOTs/HOT03/BikeShop_HOT/Areas/Admin/Views/Home/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxEZWxldGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/diamo/Desktop/AWD1115Fall2023Students-master/AWD1115Fall2023Students-master/AWD1115Fall2023LouLoyloy/HOTs/HOT03/BikeShop_HOT/Areas/Admin/Views/Home/List.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxMaXN0LmNzaHRtbA==
+[C:/Users/diamo/Desktop/AWD1115Fall2023Students-master/AWD1115Fall2023Students-master/AWD1115Fall2023LouLoyloy/HOTs/HOT03/BikeShop_HOT/Areas/Admin/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/diamo/Desktop/AWD1115Fall2023Students-master/AWD1115Fall2023Students-master/AWD1115Fall2023LouLoyloy/HOTs/HOT03/BikeShop_HOT/Areas/Admin/Views/Product/AddUpdate.cshtml]
