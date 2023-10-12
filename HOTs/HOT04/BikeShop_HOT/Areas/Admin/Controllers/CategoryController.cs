@@ -1,0 +1,173 @@
+﻿using BikeShop_HOT.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Collections;
+using System.Data;
+using System.Security.Policy;
+using Category = BikeShop_HOT.Models.Category;
+
+
+namespace BikeShop_HOT.Areas.Admin.Controllers
+{
+    [Area("Admin")]
+    public class CategoryController : Controller
+    {
+
+        //constructors
+        private BikeShopContext BsContext { get; set; }
+
+        public CategoryController(BikeShopContext context) 
+        {
+            BsContext = context;
+        }
+
+        ProductListViewModel vm = new ProductListViewModel();
+        
+
+        [Route("/admin/category/{id?}/{Slug?}")]
+        public IActionResult List()
+        {
+            
+            
+          
+            //ProductListViewModel vm = new ProductListViewModel();
+
+         
+
+            vm.Categories = BsContext.Categories.OrderBy(cat => cat.CategoryName).ToList();
+
+
+            return View("List", vm);
+        }
+
+        [Route("/admin/category/{action}/{id?}/{Slug?}")]
+        [HttpGet]
+        public ViewResult Update(int id) 
+        {
+            ViewBag.Action = "Update";
+            var category = BsContext.Categories.FirstOrDefault(cat => cat.CategoryID == id);
+            return View("AddUpdate",category);
+        }
+
+
+        [Route("/admin/category/{action}/{id?}/{Slug?}")]
+        [HttpGet]
+        public ViewResult Add() 
+        {
+            ViewBag.Action = "Add";
+            return View("AddUpdate", new Category());
+        }
+
+
+        [Route("/admin/category/{action}/{id?}/{Slug?}")]
+        [HttpPost]
+        public IActionResult AddUpdate(Category category) 
+        {
+            // if no id is passed in, Add product, else update
+            string AddUpdateCategory = (category.CategoryID == 0) ? "Add" : "Update";
+
+
+            if (ModelState.IsValid)
+            {
+                if (AddUpdateCategory == "Add")
+                {
+                    TempData["message"] =
+                        "Category " + category.CategoryName.ToString() + " Has Been Successfully Added To Categories.";
+                    BsContext.Categories.Add(category);
+                }
+                else
+                {
+                    TempData["message"] =
+                        "Category " + category.CategoryName.ToString() + " Has Been Successfully Updated.";
+                    BsContext.Categories.Update(category);
+                }
+
+               
+                   
+                BsContext.SaveChanges();
+
+                return RedirectToAction("List", "Category");
+            }
+            else 
+            {
+                ViewBag.Action = AddUpdateCategory;
+                return View(category);
+            }
+
+
+
+        }
+
+        [Route("/admin/category/{action}/{id?}/{Slug?}")]
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            
+            // find the category
+          var CategoryToBeGone = BsContext.Categories.Find(id);
+
+            TempData["message"] ="Category " + CategoryToBeGone?.CategoryName + " Has Been Deleted!";
+
+            //find the related data || find where this category exist 
+            var products = BsContext.Products
+                .Where(p => EF.Property<int>(p, "CategoryID") == id);
+
+          
+
+            //and delete it where this category exist
+            foreach (var prod in products)
+                  {
+                    CategoryToBeGone?.CategoryProducts?.Remove(prod);
+                  }
+
+                BsContext.Categories.Remove(CategoryToBeGone);
+               BsContext.SaveChanges() ;
+              return RedirectToAction("List", "Category");
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //[Route("/admin/category/{action}/{id?}/{Slug?}")]
+        //[HttpPost]
+        //public IActionResult Delete(Category category)
+        //{
+
+        //    var id = category.CategoryID;
+
+
+
+
+        //    // find the products that has the category that is passed in
+        //    var CategoryToBeGone = BsContext.Categories.Find(id);
+
+
+        //    var products = BsContext.Products
+        //        .Where(p => EF.Property<int>(p, "CategoryID") == id);
+
+        //    //disconnect
+        //    //remove all product category on where the category that is passed in exist/connected
+        //    foreach (var prod in products)
+        //    {
+        //        CategoryToBeGone?.CategoryProducts?.Remove(prod);
+        //    }
+
+        //    //finally remove the category
+        //    BsContext.Categories.Remove(CategoryToBeGone);
+        //    BsContext.SaveChanges() ;
+        //    return RedirectToAction("List", "Category");
+
+        //}
+
+    }
+}
