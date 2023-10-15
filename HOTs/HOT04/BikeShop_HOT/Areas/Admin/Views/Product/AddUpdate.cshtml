@@ -32,10 +32,10 @@
     <div class="form-group mt-2">
         <label asp-for="CategoryID"><strong>Category:</strong></label>
        <select asp-for="CategoryID"
-                asp-items="@(new SelectList( ViewBag.Categories, "CategoryID","CategoryName", Model.CategoryID.ToString()))" class="form-control">
+                asp-items="@(new SelectList( ViewBag.Categories, "CategoryID","CategoryName",Model.CategoryID.ToString()))" class="form-control">
 
-            <option value=" ">Select A Category...</option> 
-           
+            <option value="">Select A Category...</option> 
+          
        </select>
         <span class="text-danger" asp-validation-for="CategoryID"></span>
     </div>

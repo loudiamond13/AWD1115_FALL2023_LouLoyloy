@@ -25,6 +25,7 @@ namespace BikeShop_HOT.Models
             //                               .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Category>().HasData(
+               
                  new Category
                  {
                      CategoryID = 1,
@@ -54,8 +55,13 @@ namespace BikeShop_HOT.Models
                  {
                      CategoryID = 6,
                      CategoryName = "Wheels"
-                 }
-             );
+                 },
+                  new Category
+                  {
+                      CategoryID = 7,
+                      CategoryName = "Ω Uncategorized Products",
+                  }
+             ) ;
 
             modelBuilder.Entity<Customer>().HasData(
                 new Customer

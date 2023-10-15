@@ -28,7 +28,7 @@ namespace BikeShop_HOT.Models
         //  Foreign key
         [ValidateNever]
         [Required(ErrorMessage = "Category is Required!")]
-        public int? CategoryID { get; set; }
+        public int CategoryID { get; set; }
 
         //  Navigation property
         [ValidateNever]

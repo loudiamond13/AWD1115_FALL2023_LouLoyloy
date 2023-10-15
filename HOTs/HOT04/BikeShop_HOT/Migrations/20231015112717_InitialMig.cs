@@ -7,7 +7,7 @@
 namespace BikeShop_HOT.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class InitialMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -116,7 +116,8 @@ namespace BikeShop_HOT.Migrations
                     { 3, "Clothing" },
                     { 4, "Components" },
                     { 5, "Car racks" },
-                    { 6, "Wheels" }
+                    { 6, "Wheels" },
+                    { 100, "Uncategorized Products" }
                 });
 
             migrationBuilder.InsertData(

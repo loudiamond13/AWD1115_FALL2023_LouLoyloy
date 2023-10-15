@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
+using System.ComponentModel;
 using System.Data;
+using System.Linq;
 using System.Security.Policy;
 using Category = BikeShop_HOT.Models.Category;
 
@@ -102,27 +104,45 @@ namespace BikeShop_HOT.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            
-            // find the category
-          var CategoryToBeGone = BsContext.Categories.Find(id);
+           
 
-            TempData["message"] ="Category " + CategoryToBeGone?.CategoryName + " Has Been Deleted!";
+            // find the category
+            var CategoryToBeGone = BsContext.Categories.Find(id);
+          
+
+         
+            
+
+            
+
+           
 
             //find the related data || find where this category exist 
             var products = BsContext.Products
                 .Where(p => EF.Property<int>(p, "CategoryID") == id);
 
-          
+            //messsage 
+            TempData["message"] = "Category " + CategoryToBeGone?.CategoryName + " Has Been Deleted!";
+
+
+
 
             //and delete it where this category exist
             foreach (var prod in products)
                   {
-                    CategoryToBeGone?.CategoryProducts?.Remove(prod);
+
+                // move the product into the uncategorized product
+                prod.CategoryID = 7;
+                   
                   }
 
-                BsContext.Categories.Remove(CategoryToBeGone);
-               BsContext.SaveChanges() ;
-              return RedirectToAction("List", "Category");
+            //remove the category that passed in
+              BsContext.Categories.Remove(CategoryToBeGone);
+            BsContext.SaveChanges() ;
+
+
+           
+          return RedirectToAction("List", "Category");
 
         }
 
@@ -138,36 +158,8 @@ namespace BikeShop_HOT.Areas.Admin.Controllers
 
 
 
-        //[Route("/admin/category/{action}/{id?}/{Slug?}")]
-        //[HttpPost]
-        //public IActionResult Delete(Category category)
-        //{
 
-        //    var id = category.CategoryID;
-
-
-
-
-        //    // find the products that has the category that is passed in
-        //    var CategoryToBeGone = BsContext.Categories.Find(id);
-
-
-        //    var products = BsContext.Products
-        //        .Where(p => EF.Property<int>(p, "CategoryID") == id);
-
-        //    //disconnect
-        //    //remove all product category on where the category that is passed in exist/connected
-        //    foreach (var prod in products)
-        //    {
-        //        CategoryToBeGone?.CategoryProducts?.Remove(prod);
-        //    }
-
-        //    //finally remove the category
-        //    BsContext.Categories.Remove(CategoryToBeGone);
-        //    BsContext.SaveChanges() ;
-        //    return RedirectToAction("List", "Category");
-
-        //}
+        
 
     }
 }

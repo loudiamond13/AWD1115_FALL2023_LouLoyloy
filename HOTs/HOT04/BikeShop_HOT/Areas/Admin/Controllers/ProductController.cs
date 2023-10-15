@@ -53,7 +53,7 @@ namespace BikeShop_HOT.Areas.Admin.Controllers
             viewModel.Products =  BsContext.Products.OrderBy(prod => prod.Name).ToList();
             // all categories to List
           
-            viewModel.Categories = BsContext.Categories.ToList();
+            viewModel.Categories = BsContext.Categories.OrderBy(cat => cat.CategoryName).ToList();
 
 
 

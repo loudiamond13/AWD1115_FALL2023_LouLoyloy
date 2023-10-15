@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ucxBNmf2JQe5f6tXPy0bNIoM4TjGmXOOvfCukNUXYE9WgK9LmHbyVfdtJrv/tJUAF/SxJijoSMH+qzHBOoCBtw==",
+  "dgSpecHash": "+Ym50cwa+2YKHe/wZWMU0lKjDMyExYyfF99JS3h55mu0X3sVXhJsT8iMYdEh7hmEP589UAOWm4Oyzomw/6mU5Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\diamo\\Desktop\\LouProgramming\\AWD1115 praktis\\HOT04\\BikeShop_HOT\\BikeShop_HOT.csproj",
+  "projectFilePath": "C:\\Users\\diamo\\Desktop\\AWD1115Fall2023Students-master\\AWD1115Fall2023Students-master\\AWD1115Fall2023LouLoyloy\\HOTs\\HOT04\\BikeShop_HOT\\BikeShop_HOT.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\diamo\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\diamo\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
