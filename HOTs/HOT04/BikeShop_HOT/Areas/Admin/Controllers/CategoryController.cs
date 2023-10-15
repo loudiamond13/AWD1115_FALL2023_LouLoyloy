@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using Category = BikeShop_HOT.Models.Category;
@@ -65,6 +66,8 @@ namespace BikeShop_HOT.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult AddUpdate(Category category) 
         {
+
+
             // if no id is passed in, Add product, else update
             string AddUpdateCategory = (category.CategoryID == 0) ? "Add" : "Update";
 
@@ -99,50 +102,66 @@ namespace BikeShop_HOT.Areas.Admin.Controllers
 
 
         }
+        
 
         [Route("/admin/category/{action}/{id?}/{Slug?}")]
         [HttpGet]
-        public IActionResult Delete(int id)
+        [HttpPost]
+        public ActionResult Delete(int id)
         {
-           
+            
 
             // find the category
             var CategoryToBeGone = BsContext.Categories.Find(id);
-          
+
+            // if uncategorized category is passed in to be deleted, prevent it to be deleted
+            //do not go anywhere
+            if (id == 7)
+            {
+               
+                ModelState.AddModelError(nameof(id), "Email not found or matched");
+                TempData["deleteMSG"] = $"Deletion of {CategoryToBeGone.CategoryName} is Prohibited!";
+                
+                return RedirectToAction("List", id);
+            }
+            else 
+            {
+                TempData["message"] = "Category " + CategoryToBeGone?.CategoryName + " Has Been Deleted!";
+
+                //find the related data || find where this category exist 
+                var products = BsContext.Products
+                    .Where(p => EF.Property<int>(p, "CategoryID") == id);
+
+                //messsage 
+                TempData["message"] = "Category " + CategoryToBeGone?.CategoryName + " Has Been Deleted!";
+
+
+
+
+                //and delete it where this category exist
+                foreach (var prod in products)
+                {
+
+                    // move the product into the uncategorized product
+                    prod.CategoryID = 7;
+
+                }
+
+                //remove the category that passed in
+                BsContext.Categories.Remove(CategoryToBeGone);
+                BsContext.SaveChanges();
+
+
+
+                return RedirectToAction("List", "Category");
+            }
+
+
+
+
+
 
          
-            
-
-            
-
-           
-
-            //find the related data || find where this category exist 
-            var products = BsContext.Products
-                .Where(p => EF.Property<int>(p, "CategoryID") == id);
-
-            //messsage 
-            TempData["message"] = "Category " + CategoryToBeGone?.CategoryName + " Has Been Deleted!";
-
-
-
-
-            //and delete it where this category exist
-            foreach (var prod in products)
-                  {
-
-                // move the product into the uncategorized product
-                prod.CategoryID = 7;
-                   
-                  }
-
-            //remove the category that passed in
-              BsContext.Categories.Remove(CategoryToBeGone);
-            BsContext.SaveChanges() ;
-
-
-           
-          return RedirectToAction("List", "Category");
 
         }
 

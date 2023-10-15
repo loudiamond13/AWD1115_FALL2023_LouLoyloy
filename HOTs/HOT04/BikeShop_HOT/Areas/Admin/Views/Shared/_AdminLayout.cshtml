@@ -17,6 +17,7 @@
 
     string? message = TempData["message"]?.ToString();
     string? subheader = TempData["subheader"]?.ToString();
+    string? deleteMSG = TempData["deleteMSG"]?.ToString();
 }
 
 <!DOCTYPE html>
@@ -83,9 +84,13 @@
 
 
         <main role="main" class="pb-3 mb-4">
-             @if (!string.IsNullOrEmpty(message))
+            @if (!string.IsNullOrEmpty(deleteMSG))
             {
-                <h2 id="msg" class="bg-light text-center p-2 mb-1">@message</h2>
+                <h2 class="rounded bg-light text-center pg-3 mb-1 alert-danger">@deleteMSG</h2>
+            }
+            @if (!string.IsNullOrEmpty(message))
+            {
+                <h2 id="msg" class=" rounded bg-light text-center p-2 alert-success mb-1">@message</h2>
             } 
             @if (!string.IsNullOrEmpty(subheader))
             {
