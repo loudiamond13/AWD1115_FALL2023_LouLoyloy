@@ -6,13 +6,14 @@ namespace SportsPro.Controllers
 {
     public class TechnicianController : Controller
     {
-
+        private readonly IUnitOfWork unitOfWork;
         private ITechnicianRepository technicianContextRepository;
 
         // constructor
-        public TechnicianController(ITechnicianRepository context)
+        public TechnicianController(ITechnicianRepository context, IUnitOfWork ctx)
         { 
             technicianContextRepository = context;
+            unitOfWork = ctx;
         }
 
         [Route("/technicians")]
@@ -56,14 +57,14 @@ namespace SportsPro.Controllers
             {
                 if (technician.TechnicianID == 0)
                 {
-                    technicianContextRepository.Add(technician);
+                    unitOfWork.Technicians.Add(technician);
                 }
                 else
                 {
-                    technicianContextRepository.Update(technician);
+                    unitOfWork.Update(technician);
                 }
 
-                technicianContextRepository.Save();
+                unitOfWork.Complete();
 
                 return RedirectToAction("List", "Technician");
             }
@@ -92,8 +93,9 @@ namespace SportsPro.Controllers
         [HttpPost]
         public IActionResult Delete(Technician technician)
         {
-            technicianContextRepository.Delete(technician.TechnicianID);
-            technicianContextRepository.Save();
+            unitOfWork.Technicians.Delete(technician);
+            unitOfWork.Complete();
+            unitOfWork.Dispose();
             return RedirectToAction("List", "Technician");
         }
 

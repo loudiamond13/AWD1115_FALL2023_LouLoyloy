@@ -10,6 +10,7 @@ namespace SportsPro.Models
     {
         public int IncidentID { get; set; }
 
+
         [Required]
         public int CustomerID { get; set; }     // foreign key property
         [ValidateNever]

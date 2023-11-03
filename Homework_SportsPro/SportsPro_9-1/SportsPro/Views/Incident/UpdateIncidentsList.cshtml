@@ -6,8 +6,8 @@
     ViewData["title"] = "Incidents List";
 }
 
-<h3>@Model.Technicians</h3><br>
-<h3>Assigned/Open Incidents</h3>
+<h3>Technician: @Model.Technician?.Name</h3>
+<h3>Assigned/Open Incidents </h3>
 <table class="table-striped table table-bordered">
     <thead>
         <tr>
@@ -31,8 +31,8 @@
                 <td>@i.DateOpened</td>
 
                 <td>
-                    <a class="btn btn-primary" asp-controller="UpdateIncident"
-                       asp-action="Edit" asp-route-id="@i.IncidentID">
+                    <a class="btn btn-primary" asp-controller="Incident"
+                       asp-action="UpdateIncident" asp-route-id="@i.IncidentID">
                         Edit
                     </a>
                 </td>
@@ -42,8 +42,8 @@
 
 </table>
 <td>
-    <a class="btn btn-primary" asp-controller="UpdateIncident"
-       asp-action="SelectTech">
+    <a class="btn btn-primary" asp-controller="Incident"
+       asp-action="TechniciansSelectList">
         Switch Technician
     </a>
 </td>

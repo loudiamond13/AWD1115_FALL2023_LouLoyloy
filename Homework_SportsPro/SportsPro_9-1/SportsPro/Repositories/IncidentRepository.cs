@@ -1,79 +1,55 @@
 ﻿using SportsPro.Models;
 using SportsPro.Repositories.Interfaces;
-using SportsPro;
+using System.Linq;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace SportsPro.Repositories
 {
-    public class IncidentRepository : IIncidentRepository
+    public class IncidentRepository : Repository<Incident>, IIncidentRepository
     {
-        private readonly SportsProContext incidentContextRepository;
-       
-
-        public IncidentRepository(SportsProContext context) { 
-        
-            incidentContextRepository = context;
+        public IncidentRepository(SportsProContext ctx)
+            : base(ctx)
+        {
         }
 
-        // gets all incident
-        public IQueryable<Incident> GetAll()
+        public SportsProContext SportsProContext
         {
-            var incidents = incidentContextRepository.Incidents.Include(p => p.Product)
-                                                                .Include(t=>t.Technician)
-                                                                .Include(c=>c.Customer);
-            return incidents;
+            get { return Context as SportsProContext; }
         }
 
-        //adds incident
-        public void Add(Incident incident)
+        public IEnumerable<Incident> GetAllOpenIncidents()
         {
-            incidentContextRepository.Incidents.Add(incident);
+            return SportsProContext.Incidents.Where(i => i.DateClosed == null)
+                                                .ToList();
         }
 
-        // deletes incident
-        public void Delete(int id)
+        public IEnumerable<Incident> GetAllUnassignedIncidents()
         {
-            // find the passed in id in the incidents DB and 
-            var incident = incidentContextRepository.Incidents.Find(id);
-
-            //delete incident if found
-            if (incident != null) 
-            {
-                incidentContextRepository.Incidents.Remove(incident); 
-            }
+            return SportsProContext.Incidents.Where(i => i.TechnicianID == null).ToList();
         }
 
-        //gets incident by ID
-        public Incident GetByID(int id)
+        public IEnumerable<Incident> GetIncidentsOfSelectedTech(int id)
         {
-            // find the passed in id in the incidents DB and return if found
-            var incident = incidentContextRepository.Incidents.Find(id);
+            
 
-            return incident;
-          
+            
+            
+                return SportsProContext.Incidents.Include(i => i.Technician)
+                                                    .Include(i => i.Product)
+                                                    .Include(i => i.Customer)
+                                                .Where(i => i.TechnicianID == id).ToList();       
         }
 
-     
-
-      
-        // updates incident
-        public void Update(Incident inci)
+       public IEnumerable<Incident> GetIncidentForUpdate(int id)
         {
-            var incident = incidentContextRepository.Incidents
-                                .FirstOrDefault(i => i.IncidentID == inci.IncidentID);
+            return SportsProContext.Incidents.Include(i => i.Technician)
+                  .Include(i => i.Product)
+                                                    .Include(i => i.Customer)
+                .Where(i => i.IncidentID == id);
 
-            // if incident is not null
-            //an incident found, update it
-            if (inci != null)
-            { 
-                incidentContextRepository.Incidents.Update(incident);
-            }
-        }
 
-        //save 
-        public void Save()
-        {
-            incidentContextRepository.SaveChanges();
+
         }
     }
 }

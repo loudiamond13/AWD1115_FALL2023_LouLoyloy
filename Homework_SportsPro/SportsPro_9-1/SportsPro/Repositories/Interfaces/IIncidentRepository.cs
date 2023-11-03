@@ -2,18 +2,15 @@
 
 namespace SportsPro.Repositories.Interfaces
 {
-    public interface IIncidentRepository 
+    public interface IIncidentRepository : IRepository<Incident>
     {
-        IQueryable<Incident> GetAll();
+        IEnumerable<Incident> GetAllUnassignedIncidents();
+        IEnumerable<Incident> GetIncidentForUpdate(int id);
 
-        Incident GetByID(int id);
+        IEnumerable<Incident> GetAllOpenIncidents();
+        IEnumerable<Incident> GetIncidentsOfSelectedTech(int id);
 
-        void Add(Incident incident);
 
-        void Update(Incident incident); 
 
-        void Delete(int id);
-        
-        void Save();
     }
 }

@@ -13,6 +13,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<SportsProContext>(options => options.UseSqlServer(
                                                 builder.Configuration.GetConnectionString("SportsProContext")));
 
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<IIncidentRepository, IncidentRepository>();
 builder.Services.AddTransient<ITechnicianRepository, TechnicianRepository>();
 
